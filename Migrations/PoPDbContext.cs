@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using TEAM_ONE_AND_ZERO_BACKEND.Models;
 
-namespace backend.Migrations;
+namespace TEAM_ONE_AND_ZERO_BACKEND.Migrations;
 
 public class PoPDbContext : DbContext
 {

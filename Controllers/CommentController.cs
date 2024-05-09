@@ -1,6 +1,9 @@
 using TEAM_ONE_AND_ZERO_BACKEND.Models;
 using TEAM_ONE_AND_ZERO_BACKEND.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 namespace backend.Controllers
 {
@@ -23,7 +26,19 @@ namespace backend.Controllers
             return Ok(_commentRepository.GetAllComments());
         }
 
+        [HttpGet]
+        [Route("{commentId: int}")]
+        public ActionResult<Comment> GetCommentById(int commentId){
+            var comment = _commentRepository.GetComment(commentId);
+            if(comment == null)
+            {
+                return NotFound();
+            }
+            return Ok(comment);
+        }
+
         [HttpPost]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public ActionResult<Comment> CreateComment(Comment comment)
         {
             if(!ModelState.IsValid){
@@ -35,6 +50,7 @@ namespace backend.Controllers
 
         [HttpPut]
         [Route("{commentId: int}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public ActionResult<Comment> UpdateComment(Comment comment){
             if(!ModelState.IsValid){
                 return BadRequest();
@@ -45,6 +61,7 @@ namespace backend.Controllers
 
         [HttpDelete]
         [Route("{commentId: int}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public ActionResult DeleteComment(int commentId){
             _commentRepository.DeleteComment(commentId);
             return NoContent();

@@ -5,7 +5,7 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 
-namespace backend.Controllers
+namespace TEAM_ONE_AND_ZERO_BACKEND.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]

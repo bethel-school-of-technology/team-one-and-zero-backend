@@ -1,4 +1,4 @@
-using backend.Migrations;
+using TEAM_ONE_AND_ZERO_BACKEND.Migrations;
 
 var builder = WebApplication.CreateBuilder(args);
 

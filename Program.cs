@@ -1,7 +1,12 @@
 using TEAM_ONE_AND_ZERO_BACKEND.Migrations;
 using TEAM_ONE_AND_ZERO_BACKEND.Repositories;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var secretKey = builder.Configuration["TokenSecret"];
 
 // Add services to the container.
 
@@ -12,6 +17,28 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddSqlite<PoPDbContext>("Data Source=PoPProject.db");
 builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 var app = builder.Build();
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(cfg =>
+{
+    cfg.RequireHttpsMetadata = true;
+    cfg.SaveToken = true;
+    cfg.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
+    {
+        IssuerSigningKey = new SymmetricSecurityKey(secretKey),
+        ValidateAudience = false,
+        ValidateIssuer = false,
+        ValidateLifetime = false,
+        RequireExpirationTime = false,
+        ClockSkew = TimeSpan.Zero,
+        ValidateIssuerSigningKey = true
+    };
+}
+);
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -27,5 +54,3 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
-
-

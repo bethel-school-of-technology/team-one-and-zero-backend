@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using team_one_and_zero.Repositories;
+using TEAM_ONE_AND_ZERO_BACKEND.Repositories;
 using TEAM_ONE_AND_ZERO_BACKEND.Models;
 
 namespace TEAM_ONE_AND_ZERO_BACKEND.Controllers;

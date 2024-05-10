@@ -1,4 +1,4 @@
-using team_one_and_zero.Models;
+using TEAM_ONE_AND_ZERO_BACKEND.Models;
 
 namespace team_one_and_zero.Repositories;
 

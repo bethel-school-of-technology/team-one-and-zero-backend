@@ -18,6 +18,7 @@ public class PoPDbContext : DbContext
             entity.HasKey(e => e.CommentID);
             entity.Property(e => e.Description).IsRequired();
             entity.Property(e => e.Username).IsRequired();
+            entity.Property(e => e.DateTime);
         });
         modelBuilder.Entity<User>(entity => {
             entity.HasKey(e => e.UserId);

@@ -12,4 +12,6 @@ public class Comment
     [Required]
     public string? Description { get; set; }
 
+    public DateTime DateTime {get; set;}
+
 }

@@ -1,12 +1,12 @@
-using TEAM_ONE_ZERO_BACKEND.Models;
-using TEAM_ONE_ZERO_BACKEND.Migrations;
+using TEAM_ONE_AND_ZERO_BACKEND.Models;
+using TEAM_ONE_AND_ZERO_BACKEND.Migrations;
 using bycrypt = BCrypt.Net.BCrypt;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 
-namespace TEAM_ONE_ZERO_BACKEND.Repositories;
+namespace TEAM_ONE_AND_ZERO_BACKEND.Repositories;
 
 public class UserRepository : IUserRepository
 {
@@ -25,7 +25,7 @@ public class UserRepository : IUserRepository
         var signingCredentials = new SigningCredentials(signinkey, SecurityAlgorithms.HmacSha256);
         
         //Create Claims to add JWT
-        varr claims = new Claim[]
+        var claims = new Claim[]
         {
             new Claim(JwtRegisteredClaimNames.Sub, user.UserId.ToString()),
             new Claim(JwtRegisteredClaimNames.Email, user.Email ?? ""),
@@ -45,7 +45,7 @@ public class UserRepository : IUserRepository
     public User CreateUser(User user)
     {
         var passwordHash = bycrypt.HashPassword(user.Password);
-        user.password = passwordHash;
+        user.Password = passwordHash;
 
         _context.Add(user);
         _context.SaveChanges();
@@ -58,7 +58,7 @@ public class UserRepository : IUserRepository
         var verified = false;
         
         if (user != null) {
-            verified = bycrypt.Verify(password, user.password);
+            verified = bycrypt.Verify(password, user.Password);
         }
 
         if (user == null || !verified) 

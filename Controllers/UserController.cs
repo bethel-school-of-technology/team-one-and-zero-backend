@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using TEAM_ONE_AND_ZERO_BACKEND.Repositories;
 using TEAM_ONE_AND_ZERO_BACKEND.Models;
-using team_one_and_zero.Repositories;
 
 namespace TEAM_ONE_AND_ZERO_BACKEND.Controllers;
 

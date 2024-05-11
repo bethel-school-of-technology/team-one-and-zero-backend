@@ -37,6 +37,7 @@ builder.Services.AddSwaggerGen(c => {
 
 builder.Services.AddSqlite<PoPDbContext>("Data Source=PoPProject.db");
 builder.Services.AddScoped<ICommentRepository, CommentRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 var secretKey = builder.Configuration["TokenSecret"];
 

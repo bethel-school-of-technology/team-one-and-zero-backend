@@ -23,7 +23,7 @@ namespace TEAM_ONE_AND_ZERO_BACKEND.Controllers
             return Ok(_commentRepository.GetAllComments());
         }
         [HttpGet]
-        [Route("{commentId: int}")]
+        [Route("{commentId:int}")]
         public ActionResult<Comment> GetCommentById(int commentId){
             var comment = _commentRepository.GetComment(commentId);
             if(comment == null)
@@ -43,7 +43,7 @@ namespace TEAM_ONE_AND_ZERO_BACKEND.Controllers
             return Created(nameof(GetComments), newComment);
         }
         [HttpPut]
-        [Route("{commentId: int}")]
+        [Route("{commentId:int}")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public ActionResult<Comment> UpdateComment(Comment comment){
             if(!ModelState.IsValid){
@@ -52,7 +52,7 @@ namespace TEAM_ONE_AND_ZERO_BACKEND.Controllers
             return Ok(_commentRepository.UpdateComment(comment));
         }
         [HttpDelete]
-        [Route("{commentId: int}")]
+        [Route("{commentId:int}")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public ActionResult DeleteComment(int commentId){
             _commentRepository.DeleteComment(commentId);

@@ -6,5 +6,6 @@ public interface IUserRepository
 {
     User CreateUser (User user);
     string SignIn (string username, string password);
-
+    IEnumerable<User> GetAllUsers();
+    Task<User?> GetUserByUsername (string username);
 }

@@ -49,4 +49,24 @@ public class UserController : ControllerBase
 
         return Ok(token);
     }
+
+    [HttpGet]
+    public ActionResult<IEnumerable<User>> GetAllUsers()
+    {
+        return Ok(_authService.GetAllUsers());
+    }
+
+    [HttpGet]
+    [Route("{username}")]
+    public async Task<ActionResult<User>> GetUserByUsername(string username)
+    {
+        var name = _authService.GetUserByUsername(username);
+
+        if (name == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(await name);
+    }
 }

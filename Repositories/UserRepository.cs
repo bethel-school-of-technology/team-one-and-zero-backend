@@ -5,6 +5,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.EntityFrameworkCore;
 
 namespace TEAM_ONE_AND_ZERO_BACKEND.Repositories;
 
@@ -68,5 +69,17 @@ public class UserRepository : IUserRepository
 
         // Create & Return JWT
     return BuildToken(user);
+    }
+
+    public IEnumerable<User> GetAllUsers()
+    {
+        return _context.Users.ToList();
+    }
+
+    public async Task<User?> GetUserByUsername(string username)
+    {
+        return await _context.Users
+                .Where(x => x.Username == username)
+                .SingleOrDefaultAsync();
     }
 }

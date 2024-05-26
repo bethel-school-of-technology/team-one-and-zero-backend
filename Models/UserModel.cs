@@ -20,4 +20,7 @@ public class User
     public string? Description {get; set;}
 
     public string? Birthdate {get; set;}
+
+    [Required]
+    public string? ProfilePhoto {get; set;}
 }

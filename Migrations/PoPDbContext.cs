@@ -18,7 +18,7 @@ public class PoPDbContext : DbContext
             entity.HasKey(e => e.CommentID);
             entity.Property(e => e.Description).IsRequired();
             entity.Property(e => e.Username).IsRequired();
-            entity.Property(e => e.DateTime);
+            entity.Property(e => e.CreatedAt);
         });
         modelBuilder.Entity<User>(entity => {
             entity.HasKey(e => e.UserId);
@@ -29,6 +29,7 @@ public class PoPDbContext : DbContext
             entity.Property(e => e.Password).IsRequired();
             entity.Property(e => e.Description).IsRequired();
             entity.Property(e => e.Birthdate);
+            entity.Property(e => e.ProfilePhoto).IsRequired();
 
         });
     }

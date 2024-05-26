@@ -3,6 +3,7 @@ using TEAM_ONE_AND_ZERO_BACKEND.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace TEAM_ONE_AND_ZERO_BACKEND.Controllers
 {
@@ -39,8 +40,11 @@ namespace TEAM_ONE_AND_ZERO_BACKEND.Controllers
             if(!ModelState.IsValid){
                 return BadRequest();
             }
+
+            comment.UserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+
             var newComment = _commentRepository.CreateComment(comment);
-            return Created(nameof(GetComments), newComment);
+            return Created(nameof(GetCommentById), newComment);
         }
         [HttpPut]
         [Route("{commentId:int}")]

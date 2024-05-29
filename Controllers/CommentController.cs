@@ -23,6 +23,21 @@ namespace TEAM_ONE_AND_ZERO_BACKEND.Controllers
         {
             return Ok(_commentRepository.GetAllComments());
         }
+
+        [HttpGet]
+        [Route("{username}")]
+        public async Task<ActionResult<IEnumerable<Comment>>> GetCommentsByUsername(string username)
+        {
+            IEnumerable<Comment> comment = (IEnumerable<Comment>) await _commentRepository.GetCommentsByUsername(username);
+
+            if (comment == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(comment);
+        }
+
         [HttpGet]
         [Route("{commentId:int}")]
         public ActionResult<Comment> GetCommentById(int commentId){

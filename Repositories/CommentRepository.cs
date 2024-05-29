@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using TEAM_ONE_AND_ZERO_BACKEND.Migrations;
 using TEAM_ONE_AND_ZERO_BACKEND.Models;
 
@@ -15,6 +16,14 @@ public class CommentRepository : ICommentRepository
     public IEnumerable<Comment> GetAllComments()
     {
         return _context.Comment.ToList();
+    }
+
+    public async Task<IEnumerable<Comment?>> GetCommentsByUsername(string username)
+    {
+        return await _context.Comment
+                .Where(x => x.Username == username)
+                .ToListAsync();
+;
     }
 
     public Comment? GetComment(int commentId)

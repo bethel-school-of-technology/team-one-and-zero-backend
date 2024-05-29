@@ -5,6 +5,7 @@ namespace TEAM_ONE_AND_ZERO_BACKEND.Repositories;
 public interface ICommentRepository
 {
     IEnumerable<Comment> GetAllComments();
+    Task<IEnumerable<Comment?>> GetCommentsByUsername(string username);
     Comment? GetComment(int commentId); 
     Comment CreateComment(Comment newComment);
     Comment? UpdateComment(Comment newComment);

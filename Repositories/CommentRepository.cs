@@ -23,7 +23,6 @@ public class CommentRepository : ICommentRepository
         return await _context.Comment
                 .Where(x => x.Username == username)
                 .ToListAsync();
-;
     }
 
     public Comment? GetComment(int commentId)

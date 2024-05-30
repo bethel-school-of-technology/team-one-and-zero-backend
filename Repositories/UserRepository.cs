@@ -71,6 +71,11 @@ public class UserRepository : IUserRepository
     return BuildToken(user);
     }
 
+    public User GetUserById(int user)
+    {
+        return _context.Users.SingleOrDefault(p => p.UserId == user);
+    }
+
     public IEnumerable<User> GetAllUsers()
     {
         return _context.Users.ToList();
@@ -82,4 +87,10 @@ public class UserRepository : IUserRepository
                 .Where(x => x.Username == username)
                 .SingleOrDefaultAsync();
     }
+
+    public User GetCurrentUser()
+    {
+        return _context.Users.SingleOrDefault();
+    }
+
 }

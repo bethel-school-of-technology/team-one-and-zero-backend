@@ -1,6 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using TEAM_ONE_AND_ZERO_BACKEND.Repositories;
 using TEAM_ONE_AND_ZERO_BACKEND.Models;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace TEAM_ONE_AND_ZERO_BACKEND.Controllers;
 
@@ -51,6 +54,20 @@ public class UserController : ControllerBase
     }
 
     [HttpGet]
+    [Route("{userId:int}")]
+    public ActionResult<User> GetUserById(int userId)
+    {
+        var user = _authService.GetUserById(userId);
+        
+        if(user == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(user);
+    }
+
+    [HttpGet]
     public ActionResult<IEnumerable<User>> GetAllUsers()
     {
         return Ok(_authService.GetAllUsers());
@@ -68,5 +85,24 @@ public class UserController : ControllerBase
         }
 
         return Ok(await name);
+    }
+
+    [HttpGet]
+    [Route("current")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    public ActionResult GetCurrentUser()
+    {
+        bool isLoggedIn = User.Identity.IsAuthenticated;
+
+        if(!isLoggedIn)
+        {
+            return NotFound();
+
+        }
+        
+        var id = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+        User currentUser = _authService.GetUserById(id);
+
+        return Ok(currentUser);
     }
 }

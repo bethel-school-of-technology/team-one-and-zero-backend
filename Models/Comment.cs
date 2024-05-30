@@ -17,4 +17,7 @@ public class Comment
 
     [ForeignKey("User")]
     public int UserId { get; set; }
+
+    [ForeignKey("Song")]
+    public int Song { get; set; }
 }

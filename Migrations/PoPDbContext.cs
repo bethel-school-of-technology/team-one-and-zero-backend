@@ -14,6 +14,11 @@ public class PoPDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
+        modelBuilder.Entity<Song>(entity => {
+            entity.HasKey(e => e.SongId);
+            entity.Property(e => e.SongName).IsRequired();
+            entity.Property(e => e.SongArtist).IsRequired();
+        });
         modelBuilder.Entity<Comment>(entity => {
             entity.HasKey(e => e.CommentID);
             entity.Property(e => e.Description).IsRequired();

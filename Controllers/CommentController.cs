@@ -56,7 +56,7 @@ namespace TEAM_ONE_AND_ZERO_BACKEND.Controllers
                 return BadRequest();
             }
 
-            comment.UserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+            // comment.UserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
 
             var newComment = _commentRepository.CreateComment(comment);
             return Created(nameof(GetCommentById), newComment);

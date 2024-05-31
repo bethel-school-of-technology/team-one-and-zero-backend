@@ -18,6 +18,10 @@ public class Comment
     [ForeignKey("User")]
     public int UserId { get; set; }
 
+    public User User { get; set; }
+
     [ForeignKey("Song")]
-    public int Song { get; set; }
+    public int SongId { get; set; }
+
+    public Song Song { get; set; }
 }

@@ -12,8 +12,8 @@ public class Song
 
     [Required]
     public string? SongArtist { get; set; }
-    public string? SpodifyId { get; set; }
+    
+    public string? SpotifyId { get; set; }
 
-    [ForeignKey("Comment")]
-    public int CommentId { get; set; }
+    public ICollection<Comment> Comments { get; set; } = new List<Comment>();
 }

@@ -30,12 +30,26 @@ namespace TEAM_ONE_AND_ZERO_BACKEND.Controllers
         {
             IEnumerable<Comment> comment = (IEnumerable<Comment>) await _commentRepository.GetCommentsByUsername(username);
 
-            if (comment == null)
+            if (comment == null || !comment.Any())
             {
                 return NotFound();
             }
 
             return Ok(comment);
+        }
+
+        [HttpGet]
+        [Route("song/{songId}")]
+        public async Task<ActionResult<IEnumerable<Comment>>> GetCommentsBySongID(string songId)
+        {
+            IEnumerable<Comment> comments = (IEnumerable<Comment>) await _commentRepository.GetCommentsBySongID(songId);
+
+            if (comments == null || !comments.Any())
+            {
+                return NotFound();
+            }
+
+            return Ok(comments);
         }
 
         [HttpGet]

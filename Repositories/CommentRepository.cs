@@ -25,6 +25,13 @@ public class CommentRepository : ICommentRepository
                 .ToListAsync();
     }
 
+    public async Task<IEnumerable<Comment?>> GetCommentsBySongID(string songId)
+    {
+        return await _context.Comment
+                .Where(x => x.SongId == songId)
+                .ToListAsync();
+    }
+
     public Comment? GetComment(int commentId)
     {
         return _context.Comment.SingleOrDefault(c => c.CommentID == commentId);

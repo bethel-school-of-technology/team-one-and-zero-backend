@@ -7,6 +7,7 @@ public class User
 {
     [JsonIgnore]
     public int UserId {get; set;}
+
     public string? Username {get; set;}
 
     [Required]

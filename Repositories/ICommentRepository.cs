@@ -6,6 +6,7 @@ public interface ICommentRepository
 {
     IEnumerable<Comment> GetAllComments();
     Task<IEnumerable<Comment?>> GetCommentsByUsername(string username);
+    Task<IEnumerable<Comment?>> GetCommentsBySongID(string songId);
     Comment? GetComment(int commentId); 
     Comment CreateComment(Comment newComment);
     Comment? UpdateComment(Comment newComment);

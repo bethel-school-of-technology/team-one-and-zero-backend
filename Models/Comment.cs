@@ -13,11 +13,12 @@ public class Comment
     [Required]
     public string? Description { get; set; }
 
+    [Required]
+    public string? SongId { get; set; }
+
     public DateTime CreatedAt {get; set;}
 
     [ForeignKey("User")]
     public int UserId { get; set; }
 
-    [ForeignKey("Song")]
-    public int Song { get; set; }
 }

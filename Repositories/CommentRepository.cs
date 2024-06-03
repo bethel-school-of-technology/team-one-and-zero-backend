@@ -15,7 +15,9 @@ public class CommentRepository : ICommentRepository
 
     public IEnumerable<Comment> GetAllComments()
     {
-        return _context.Comment.ToList();
+        return _context.Comment
+        .Include(c => c.User)
+        .ToList();
     }
 
     public async Task<IEnumerable<Comment?>> GetCommentsByUsername(string username)

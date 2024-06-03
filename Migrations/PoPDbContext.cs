@@ -28,10 +28,10 @@ public class PoPDbContext : DbContext
             entity.Property(e => e.CreatedAt);
         });
 
-        modelBuilder.Entity<Comment>()
-            .HasOne(c => c.User)
-            .WithMany(u => u.Comments)
-            .HasForeignKey(c => c.UserId);
+        // modelBuilder.Entity<Comment>()
+        //     .HasOne(c => c.User)
+        //     .WithMany(u => u.Comments)
+        //     .HasForeignKey(c => c.UserId);
 
         modelBuilder.Entity<Comment>()
             .HasOne(c => c.Song)

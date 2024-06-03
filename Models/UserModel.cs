@@ -24,5 +24,5 @@ public class User
     [Required]
     public string? ProfilePhoto {get; set;}
 
-    public ICollection<Comment> Comments { get; set; } = new List<Comment>();
+    // public ICollection<Comment> Comments { get; set; } = new List<Comment>();
 }
